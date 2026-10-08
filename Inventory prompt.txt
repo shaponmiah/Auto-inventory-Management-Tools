@@ -1,0 +1,70 @@
+# MASTER PROMPT — Smart Inventory UK (Full System Spec)
+# Paste this to regenerate the complete tool
+
+## PROJECT IDENTITY
+Name: Smart Inventory UK
+Purpose: Local browser-based inventory & profit system for UK multi-platform resellers
+Data: All stored in localStorage — NO server, NO external data send, fully private
+Stack: HTML5 + Tailwind CSS (CDN) + Vanilla JS + Chart.js + JsBarcode + html5-qrcode
+Theme: Dark base, animated deep-space background (parallax stars + shooting stars), claymorphism UI, accent-colour system
+
+## GLOBAL UI RULES
+- All panels/cards: Claymorphism style — rounded-20, soft dual shadows, subtle inner highlight, theme-tinted bg
+- Buttons: Flat base; hover = radial center-fill animation — GREEN (positive: Save/Submit/Add/Export/Print/Restock), RED (destructive: Clear/Delete/Cancel/Reset), PURPLE (special: Import Backup), AMBER (Low Stock toggle), theme-accent (neutral)
+- Topbar: Title left; Search box right — short pill shape; SCAN button REMOVED
+- Sidebar: Staggered slide-in on load; active indicator bar; smooth hover transition
+- Tabs: Fade+slide-up animation on switch; 10 tabs total: Dashboard, Categories, Product Catalogue, Low Stock, Restock, Bulk Stock In, Sale & Returns, Activity Log, Analytics, Settings
+- Compact spacing everywhere: reduced padding, tight form fields, condensed tables
+
+## DASHBOARD
+- Cards in single line: Inventory group (Products, Units in Stock, Stock Value, Retail Value, Low/Out, Out of Stock) + Sales & Profit group (Revenue, Purchase Cost, Gross Profit, Dispatched, Returns, Lost, Avg Profit/Sale)
+- EVERY card clickable → jumps to relevant tab
+- Real 6-month sales revenue line chart
+- Floating card animation on hover
+
+## PRODUCT CATALOGUE
+- Columns: Name · SKU · Category · In Stock · Sold · Cost · Sale · Margin · Actions
+- Name row: tiny photo icon (same size as barcode) → click to view full modal; no photo = camera icon to upload
+- Click Category → filter list to that category only
+- Add Product form: ALL fields single line (Name, SKU, Cat, Cost, Price, Photo, Save/Clear)
+- Faulty column REMOVED
+- Export CSV / Print Labels buttons
+
+## LOW STOCK
+- Toggle: "Out of Stock Only" (red hover) / "Show All Low Stock" (amber hover)
+- Out of Stock = exactly 0; Low Stock = ≤ threshold
+- Columns: Product · In Stock · Level · Deficit · Suggest Order · ReStock
+- Copy List button → green hover
+
+## SALE & RETURNS
+- Single compact panel (max-w-md) with small top tabs: "Single Sale" / "Multi-Item Basket"
+- Single Sale: Action dropdown (Dispatched/Return/Lost), Platform dropdown (eBay/Vinted/Etsy/Facebook/Depop/Others → Others = custom input), Category, Product, Qty, Price, Save Movement
+- Multi-Item Basket: Add items → running total → Submit Basket as one sale; Remove/Clear
+- All forms claymorphic, compact spacing
+
+## ACTIVITY LOG
+- Undo button (green hover) → 10-step history; confirm modal
+- Clear Log / Export CSV buttons
+- Entries show date, type, product, qty, value, platform
+
+## ANALYTICS
+- Top Products toggle: Units Sold / Revenue / Gross Profit
+- Sales by Platform breakdown
+- VAT Summary: Turnover, VAT @20%, Net
+- Monthly Profit Report → opens print/PDF
+- Import Backup button → purple hover
+
+## FEATURES
+- Gross Profit = Sale − Cost (no invested capital shown)
+- Undo last action
+- Printable barcode sheet
+- Sales log CSV export
+- Photo per product
+- Backup/Import full data
+- No native browser popups — ALL modals custom themed clay style
+- Escape/click outside closes modals
+
+## DATA STRUCTURE
+products[] → {id,name,sku,category,costPrice,salePrice,stock,lowStockLevel,sold,photo}
+activity[] → {id,date,type,productName,qty,value,platform,note}
+categories[] → {id,name,color}
